@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Gerenciador de Tarefas - Tarefas</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div class="container">
+		<h3>Cadastro de Tarefa</h3>
+		<form action="/tarefas/alterar" method="POST" class="form-horizontal" th:object="${tarefa}">
+			<div class="row">
+				<div class="form-group col-md-1">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('id')}">
+						<label th:errors="*{id}" class="validation-message"></label>
+					</div>
+					<label>Id</label> 
+					<input type="number" class="form-control" th:field="*{id}" readonly="true">
+				</div>
+			</div>			
+			<div th:replace="tarefas/cadastro :: cadastro"></div>
+		</form>
+	</div>
+	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

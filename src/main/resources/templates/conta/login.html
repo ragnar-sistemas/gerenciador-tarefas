@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Gerenciador de Tarefas - Login</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Gerenciador de Tarefas</a>
+	</nav>
+	<div class="container">
+		<h3>Login</h3>
+		<form action="/login" method="POST" class="form-signin">
+			<div class="form-group">
+				<div class="col-md-9">
+ 					<input type="text" class="form-control" placeholder="Email" name="email">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-9">
+ 					<input type="password" class="form-control" placeholder="Senha" name="senha">
+				</div>
+			</div>			
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Entrar</button>
+			</div>
+			<div class="form-group">
+				<div class="col-md-9">
+					<div class="alert alert-danger" role="alert" th:if="${param.error}">
+						N&atilde;o foi poss&iacute;vel fazer o login!
+					</div>
+				</div>
+			</div>				
+			<div class="form-group">
+				<span>N&atilde;o possui conta? <a href="/registration">Registre-se aqui!</a></span>
+			</div>			
+		</form>
+	</div>
+
+	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

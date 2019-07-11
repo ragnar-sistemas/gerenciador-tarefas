@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Gerenciador de Tarefas - Registro</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Gerenciador de Tarefas</a>
+	</nav>
+	<div class="container">
+		<h3>Registro de Usu&aacute;rio</h3>
+		<form action="/registration" method="POST" class="form-horizontal" th:object="${usuario}">
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}">
+						<label th:errors="*{email}" class="validation-message"></label>
+					</div>
+					<label>Email</label> 
+					<input type="text" class="form-control" th:field="*{email}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('senha')}">
+						<label th:errors="*{senha}" class="validation-message"></label>
+					</div>
+					<label>Senha</label> 
+					<input type="password" class="form-control" th:field="*{senha}">
+				</div>
+			</div>	
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('senhaConfirmar')}">
+						<label th:errors="*{senhaConfirmar}" class="validation-message"></label>
+					</div>
+					<label>Confirma&ccedil;&atilde;o de Senha</label> 
+					<input type="password" class="form-control" th:field="*{senhaConfirmar}">
+				</div>
+			</div>				
+			<button type="submit" class="btn btn-primary">Salvar</button>					
+		</form>
+	</div>	
+</body>
+</html>
