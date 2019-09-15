@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Gerenciador de Tarefas - Apostas</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div class="container">
+		<h3>Apostas Mega-Sena</h3>
+		<form action="#" th:action="@{/apostas/megasena}" method="POST" class="form-horizontal" th:object="${form}">
+			<div>
+				<tr th:each="dezena, itemStat : *{dezenas}">
+              		<td>
+               			<input th:field="*{dezenas[__${itemStat.index}__].idDezena}" 
+               				   class="btn btn-outline-dark" 
+               				   th:classappend="btn-xs" 
+               				   size="1%" 
+               				   readonly="readonly"/>
+               			<input th:field="*{dezenas[__${itemStat.index}__].foiSorteada}" hidden="true" />	
+               		</td>
+           		</tr>
+            </div>                		
+			<input type="submit" id="submitButton" th:value="Salvar" class="btn btn-primary">
+		</form>		
+	</div>
+	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	
+		let clicked = true;
+		$("input").click(function(){
+		    var color = clicked ? 'white' : 'blue';
+		    console.log(this);
+		  $(this).css('background-color', color);
+		 // $(this).attr('', 'true');
+		  clicked = !clicked;
+		});
+	</script>
+</body>
+</html>

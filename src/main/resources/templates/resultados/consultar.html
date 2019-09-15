@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Gerenciador de Tarefas - Resultados</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div class="container">
+		<h3>Consulta de Resultados</h3>
+		<form action="/resultados/consultar" method="POST" class="form-horizontal"  th:object="${resultadoFilter}">
+			<div class="row">
+				<div class="form-group col-md-2">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('idLoteria')}">
+						<label th:errors="*{idLoteria}" class="validation-message"></label>
+					</div>
+					<select class="form-control" th:field="*{idLoteria}">
+		  				<option th:each="loteriasEnum : ${T(br.com.ragnar.gerenciadortarefas.enuns.LoteriasEnum).values()}" 
+		  						th:value="${loteriasEnum.idLoteria}" 
+		  						th:text="${loteriasEnum.nome}">
+		  				</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-2">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('idConcurso')}">
+						<label th:errors="*{idConcurso}" class="validation-message"></label>
+					</div>
+					<label>Código do Concurso</label> 
+					<input type="number" class="form-control" th:field="*{idConcurso}">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Consultar</button>
+		</form>
+		<br>
+		<h3>Lista de Resultados</h3>
+		<table>
+			<tr th:each="resultado: ${resultados}" style="margin: 10px">
+				<td th:each="dezena: ${resultado.dezenas}" style="margin: 10px">
+					<p class="dezena-em-bola" th:classappend="${dezena.foiSorteada} ? numero-sorteado : numero-nao-sorteado" th:text="${dezena.idDezena}"></p>
+				</td>
+				<td style="margin: 10px">
+					<p class="dezena-em-bola" th:classappend="numero-acertado" th:text="${resultado.nuAcertos}"></p>
+				</td>
+				<td style="margin: 10px">
+					<p class="premio-valor" th:text="${resultado.vlPremio}"></p>
+				</td>				
+			</tr>
+		</table>
+	</div>
+	<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

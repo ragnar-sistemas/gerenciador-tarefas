@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+
+.dezena-em-bola {
+    display: inline-block;
+    width: 2em;
+    line-height: 2em;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+}
+
+.numero-sorteado {
+    color: white;
+    background-color: #7CFC00;
+}
+
+.numero-nao-sorteado {
+    color: white;
+    background-color: #911687;
+}
+
+.numero-acertado {
+    color: white;
+    background-color: #0000ff;
+}
+
+.premio-valor {
+    font-weight: bold;
+    font-size: 25px;
+    text-align:center;
+}
