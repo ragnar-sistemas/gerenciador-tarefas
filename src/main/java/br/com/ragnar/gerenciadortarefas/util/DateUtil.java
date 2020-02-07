@@ -3,7 +3,9 @@ package br.com.ragnar.gerenciadortarefas.util;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public final class DateUtil {
@@ -47,4 +49,31 @@ public final class DateUtil {
 		}
 	}
 
+	public static boolean isMenorOuIgual(Date dt1, Date dt2) {
+		dt1 = DateUtil.zeraHorasData(dt1);
+		dt2 = DateUtil.zeraHorasData(dt2);
+		return dt1.before(dt2) || dt2.equals(dt1);
+	}
+	
+	public static boolean isMenor(Date dt1, Date dt2) {
+		dt1 = DateUtil.zeraHorasData(dt1);
+		dt2 = DateUtil.zeraHorasData(dt2);
+		return dt1.before(dt2);
+	}
+	
+	public static boolean isMenor(Date dt1) {
+		dt1 = DateUtil.zeraHorasData(dt1);
+		return dt1.before(DateUtil.zeraHorasData(new Date()));
+	}
+	
+	public static Date zeraHorasData(Date dt) {
+		Calendar c = new GregorianCalendar();
+		c.setTime(dt);
+		c.set(Calendar.MILLISECOND, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		return c.getTime();
+	}
+	
 }

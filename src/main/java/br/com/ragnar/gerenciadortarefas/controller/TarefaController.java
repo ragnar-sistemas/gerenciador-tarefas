@@ -1,6 +1,6 @@
 package br.com.ragnar.gerenciadortarefas.controller;
 
-import java.util.Date;
+import static br.com.ragnar.gerenciadortarefas.util.DateUtil.isMenor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -66,7 +66,7 @@ public class TarefaController {
 		ModelAndView modelAndView = new ModelAndView();
 		if (tarefa.getDataExpiracao() == null) {
 			result.rejectValue("dataExpiracao", "data.nao.pode.ser.nulo", "A data é obrigatória");
-		} else if (tarefa.getDataExpiracao().before(new Date())) {
+		} else if (isMenor(tarefa.getDataExpiracao())) {
 			result.rejectValue("dataExpiracao", "data.nao.pode.ser.anterior.a.data.atual", "A data não pode ser anterior a data atual");
 		}
 		if (result.hasErrors()) {
