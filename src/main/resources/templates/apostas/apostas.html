@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Apostador de Loterias - Apostas</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+    <style>
+        .dezena-em-bola {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+            margin: 3px;
+            color: white;
+        }
+
+        .numero-sorteado {
+            background: #007bff;
+        }
+
+        .numero-acertado {
+            background: #28a745;
+        }
+
+        .numero-nao-sorteado {
+            background: #6c757d;
+        }
+
+        .premio-valor {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .premio-valor-pequeno {
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+
+<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+
+<div class="container mt-3">
+
+    <h3>Relatório de Apostas</h3>
+
+    <!-- ================== FORM ================== -->
+    <form action="/apostas/apostas" method="POST" class="form-horizontal" th:object="${resultadoFilter}">
+        <div class="row">
+            <div class="form-group col-md-2">
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('idLoteria')}">
+                    <label th:errors="*{idLoteria}" class="validation-message"></label>
+                </div>
+                <select class="form-control" th:field="*{idLoteria}">
+                    <option th:each="loteriasEnum : ${T(br.com.avsouza7.enuns.LoteriaEnum).values()}"
+                            th:value="${loteriasEnum.idLoteria}"
+                            th:text="${loteriasEnum.nome}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('idGrupo')}">
+                    <label th:errors="*{idGrupo}" class="validation-message"></label>
+                </div>
+                <select class="form-control" th:field="*{idGrupo}">
+                    <option th:each="grupoEnum : ${T(br.com.avsouza7.enuns.GrupoEnum).values()}"
+                            th:value="${grupoEnum.idGrupo}"
+                            th:text="${grupoEnum.nmGrupo}">
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-2">
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('idConcurso')}">
+                    <label th:errors="*{idConcurso}" class="validation-message"></label>
+                </div>
+                <label>Código do Concurso</label>
+                <input type="number" class="form-control" th:field="*{idConcurso}">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Consultar</button>
+    </form>
+    <!-- ================== SUAS APOSTAS + APOSTADORES ================== -->
+    <h3>Apostas e Apostadores</h3>
+
+    <div class="row mt-3">
+
+        <!-- SUAS APOSTAS -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Suas Apostas</strong>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Dezenas</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="aposta : ${apostas}">
+                            <td>
+                                <span th:each="d : ${aposta.dezenas}">
+                                    <span class="dezena-em-bola" th:classappend="numero-acertado" th:text="${d.nuDezena}">
+                                    </span>
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- APOSTADORES -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Apostadores</strong>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Aporte</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="apostador : ${apostadores}">
+                            <td th:text="${apostador.pessoa.nome}"></td>
+                            <td class="premio-valor-pequeno" th:text="${apostador.valorDoAporte}">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

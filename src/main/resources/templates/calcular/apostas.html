@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apostador de Loterias - Resultados</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div class="container">
+		<h3>Calcular Apostas</h3>
+		<form action="/calcular/apostas" method="POST" class="form-horizontal"  th:object="${montante}">
+			<div class="row">
+				<div class="form-group col-md-2">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('idLoteria')}">
+						<label th:errors="*{idLoteria}" class="validation-message"></label>
+					</div>
+					<select class="form-control" th:field="*{idLoteria}">
+		  				<option th:each="loteriasEnum : ${T(br.com.avsouza7.enuns.LoteriaEnum).values()}" 
+		  						th:value="${loteriasEnum.idLoteria}" 
+		  						th:text="${loteriasEnum.nome}">
+		  				</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-2">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('montante')}">
+						<label th:errors="*{montante}" class="validation-message"></label>
+					</div>
+					<label>Montante</label> 
+					<input type="number" step="0.010" class="form-control" th:field="*{montante}">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Calcular</button>				
+		</form>
+		<table>
+			<h3>Suas Apostas</h3>
+			<tr th:each="calculo: ${calculos}" style="margin: 10px">
+				<td class="premio-valor">
+					<p class="premio-valor" th:text="${calculo.sugestao}"></p>
+				</td>
+			</tr>
+		</table>		
+	</div>
+
+</body>
+</html>

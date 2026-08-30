@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Apostador de Loterias</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="cabecalho">
-		<a class="navbar-brand" href="/">Gerenciador de Tarefas</a>
+		<a class="navbar-brand" href="/">Apostador de Loterias</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-app">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -19,17 +19,22 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/tarefas/listar">Tarefas</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/pessoas/listar">Pessoas</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/grupos/listar">Grupos</a>
+				</li>	
+				
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Apostas</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="/apostas/megasena">Mega-Sena</a> 
-						<a class="dropdown-item" href="/apostas/lotofacil">Lotofácil</a> 
-						<a class="dropdown-item" href="/apostas/quina">Quina</a>
+						<a class="dropdown-item" href="/apostas/listar">Cadastro</a>
+						<a class="dropdown-item" href="/apostas/apostas">Relatório</a> 
+						<a class="dropdown-item" href="/resultados/consultar">Resultados</a>
+						<a class="dropdown-item" href="/calcular/apostas">Calcular apostas</a>
 					</div>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/resultados/consultar">Resultados</a>
-				</li>
+				</li>											
 				<li class="nav-item">
 					<a class="nav-link" href="/logout">Sair</a>
 				</li>								

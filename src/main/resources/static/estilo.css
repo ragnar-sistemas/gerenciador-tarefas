@@ -27,5 +27,34 @@
 .premio-valor {
     font-weight: bold;
     font-size: 25px;
-    text-align:center;
+    text-align:left;
+}
+
+.premio-valor-medio {
+    font-weight: bold;
+    font-size: 20px;
+    text-align:left;
+}
+
+.premio-valor-pequeno {
+    font-weight: bold;
+    font-size: 15px;
+    text-align:left;
+}
+
+.texto-simples {
+    font-size: 25px;
+    text-align:left;
+}
+.texto-simples-medio {
+    font-size: 20px;
+    text-align:left;
+}
+.texto-simples-pequeno {
+    font-size: 15px;
+    text-align:left;
+}
+.texto-proximo-sorteio {
+    font-size: 20px;
+    text-align:left;
 }
